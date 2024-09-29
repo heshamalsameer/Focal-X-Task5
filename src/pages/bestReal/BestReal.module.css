@@ -1,0 +1,11 @@
+.link {
+  color: #025595;
+}
+.link::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #025595;
+  bottom: -15px;
+}
