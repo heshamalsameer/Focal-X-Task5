@@ -1,12 +1,14 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import { HiArrowUpRight } from "react-icons/hi2";
 
-const Login = ({ btn }) => {
+const Login = ({ btn = "Login", onClick }) => {
   return (
-    <div>
-      <button className="w-[175px] lg:w-[135px] h-[38px] bg-main text-lwhite align-middle text-sm leading-[16.94px] rounded-md ">
-        {btn}
-      </button>
-    </div>
+    <button onClick={onClick} className="btn-pill">
+      {btn}
+      <span className="ic">
+        <HiArrowUpRight />
+      </span>
+    </button>
   );
 };
 

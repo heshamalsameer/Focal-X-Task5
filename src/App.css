@@ -1,53 +1,36 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+/* Section-specific extras (most styling lives in Tailwind classes + index.css) */
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */
+/* Dream home band — parallax background */
 .dream {
-  background-image: url("/src//assets/DreamHome.png");
+  background-image: linear-gradient(180deg, rgba(14, 23, 38, 0.25), rgba(14, 23, 38, 0.7)),
+    url("./assets/DreamHome.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
-.dream::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #00000080;
-  z-index: -1;
+@media (hover: none) {
+  .dream {
+    background-attachment: scroll;
+  }
+}
+
+/* How it works — progress rail */
+.rail-fill {
+  transform-origin: top;
+  transition: transform 0.2s linear;
+}
+
+/* Deals tabs pill */
+.tab-pill {
+  transition: transform 0.55s var(--ease), width 0.55s var(--ease);
+}
+
+/* Testimonials deck */
+.deck-card {
+  transition: transform 0.7s var(--ease), opacity 0.5s var(--ease), filter 0.5s;
+}
+
+/* Donut chart */
+.donut circle {
+  transition: stroke-dasharray 0.8s var(--ease), stroke-dashoffset 0.8s var(--ease);
 }

@@ -1,233 +1,117 @@
+/* eslint-disable react/prop-types */
+import { useLayoutEffect, useRef, useState } from "react";
 import Header from "../../components/headerSection/Header";
-import imag1 from "../../assets/Image1.jpg";
-import imag2 from "../../assets/Card02.png";
-import imag3 from "../../assets/Card03.png";
-import imag4 from "../../assets/most trending/card1.png";
-import imag5 from "../../assets/most trending/card2.png";
-import imag6 from "../../assets/most trending/card3.png";
-import imag7 from "../../assets/most trending/card4.png";
-import imag8 from "../../assets/most trending/card5.png";
-import imag9 from "../../assets/most trending/card6.png";
 import Styles from "./BestReal.module.css";
-import { useState } from "react";
+import { listings, categories, formatPrice } from "../../data";
+import { TbView360Number } from "react-icons/tb";
+import { HiArrowUpRight } from "react-icons/hi2";
 
-const BestReal = () => {
-  const [tap, settap] = useState(1);
+// deal discount per listing (sample data)
+const discount = (id) => [8, 12, 5, 15, 10, 7, 9, 6, 11][(id - 1) % 9];
+
+const DealCard = ({ item, big, i, onOpen }) => {
+  const off = discount(item.id);
+  const old = Math.round(item.price / (1 - off / 100));
   return (
-    <div className="mt-[94px]">
-      <Header
-        title="Best Real Estate Deals"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing eli"
-      />
-      <div className=" lg:px-[70px]">
-        <ul className="flex flex-wrap gap-[50px]">
-          <li
-            className={`${
-              tap === 1 ? Styles.link : ""
-            } relative cursor-pointer mb-[56px]`}
-            onClick={() => settap(1)}
-          >
-            Residential Property
-          </li>
-          <li
-            className={`${
-              tap === 2 ? Styles.link : ""
-            } relative cursor-pointer mb-[56px]`}
-            onClick={() => settap(2)}
-          >
-            Commercial Property
-          </li>
-          <li
-            className={`${
-              tap === 3 ? Styles.link : ""
-            } relative cursor-pointer mb-[56px]`}
-            onClick={() => settap(3)}
-          >
-            Agriculture Property
-          </li>
-          <li
-            className={`${
-              tap === 4 ? Styles.link : ""
-            } relative cursor-pointer mb-[56px]`}
-            onClick={() => settap(4)}
-          >
-            Industrial Property
-          </li>
-        </ul>
-        {tap === 1 && (
-          <div className="flex gap-[31px] flex-col lg:flex-row flex-wrap">
-            <div className="relative">
-              <img
-                src={imag1}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px] cursor-pointer "
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-            <div className="relative">
-              <img
-                src={imag2}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px] cursor-pointer "
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-            <div className="relative">
-              <img
-                src={imag3}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px]  cursor-pointer"
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-          </div>
-        )}
-        {tap === 2 && (
-          <div className="flex gap-[31px] flex-col lg:flex-row flex-wrap">
-            <div className="relative">
-              <img
-                src={imag4}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px] cursor-pointer "
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-            <div className="relative">
-              <img
-                src={imag5}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px] cursor-pointer "
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-            <div className="relative">
-              <img
-                src={imag6}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px]  cursor-pointer"
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-          </div>
-        )}
-        {tap === 4 && (
-          <div className="flex gap-[31px] flex-col lg:flex-row flex-wrap">
-            <div className="relative">
-              <img
-                src={imag2}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px] cursor-pointer "
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-            <div className="relative">
-              <img
-                src={imag6}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px] cursor-pointer "
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-            <div className="relative">
-              <img
-                src={imag1}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px]  cursor-pointer"
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-          </div>
-        )}
-        {tap === 3 && (
-          <div className="flex gap-[31px] flex-col lg:flex-row flex-wrap">
-            <div className="relative">
-              <img
-                src={imag7}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px] cursor-pointer "
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-            <div className="relative">
-              <img
-                src={imag8}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px] cursor-pointer "
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-            <div className="relative">
-              <img
-                src={imag9}
-                alt=""
-                className="max-w-[380.8px] h-[300px] rounded-[5px]  cursor-pointer"
-              />
-              <button className="absolute top-[14px] bg-[#22222266] left-[14px] w-[79.02px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                Featured
-              </button>
-              <button className="absolute top-[14px] bg-[#22222266] left-[100px] w-[30.01px] h-[26px] border-[1px] rounded-[5px] text-white text-[12px]">
-                3D
-              </button>
-            </div>
-          </div>
-        )}
+    <article
+      className={`${Styles.deal} pop-in group relative overflow-hidden rounded-[32px] ${big ? "md:row-span-2" : ""}`}
+      style={{ animationDelay: `${i * 100}ms` }}
+    >
+      <button onClick={() => onOpen(item)} data-cursor="view" className="absolute inset-0 h-full w-full" aria-label={`View ${item.title}`}>
+        <img src={item.img} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110" />
+      </button>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
+      <div className="pointer-events-none absolute left-5 top-5 flex gap-2">
+        <span className="rounded-full border border-white/40 bg-ink/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+          Featured
+        </span>
+        <span className="flex items-center gap-1 rounded-full border border-white/40 bg-ink/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+          <TbView360Number className="text-sm" /> 3D
+        </span>
       </div>
-    </div>
+      <span className="pointer-events-none absolute right-5 top-5 grid h-16 w-16 rotate-12 place-items-center rounded-full bg-coral text-center text-xs font-bold leading-tight text-white transition-transform duration-700 ease-out group-hover:rotate-0">
+        -{off}%
+      </span>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 text-white md:p-8">
+        <p className="text-sm text-white/70">{item.city} · {item.type}</p>
+        <h3 className={`mt-1 font-display font-medium leading-tight ${big ? "text-4xl md:text-5xl" : "text-2xl"}`}>{item.title}</h3>
+        <div className="mt-3 flex items-end justify-between gap-4">
+          <div>
+            <span className="mr-2 text-sm text-white/50 line-through">{formatPrice(old)}</span>
+            <span className="font-display text-2xl">{formatPrice(item.price)}</span>
+          </div>
+          <span className="grid h-12 w-12 translate-y-4 place-items-center rounded-full bg-paper text-xl text-ink opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+            <HiArrowUpRight />
+          </span>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+const BestReal = ({ onOpen }) => {
+  const [tap, settap] = useState(0);
+  const refs = useRef([]);
+  const [pill, setPill] = useState({ x: 0, w: 0 });
+
+  useLayoutEffect(() => {
+    const u = () => {
+      const el = refs.current[tap];
+      if (el) setPill({ x: el.offsetLeft, w: el.offsetWidth });
+    };
+    u();
+    document.fonts?.ready.then(u);
+    window.addEventListener("resize", u);
+    return () => window.removeEventListener("resize", u);
+  }, [tap]);
+
+  const cat = categories[tap];
+  const items = listings.filter((l) => l.category === cat).slice(0, 3);
+  const fill = items.length < 3 ? listings.filter((l) => l.category !== cat).slice(0, 3 - items.length) : [];
+  const shown = [...items, ...fill];
+
+  return (
+    <section id="deals" className="bg-cream py-24 lg:py-32">
+      <div className="container-x">
+        <Header
+          num="05"
+          eyebrow="Best real estate deals"
+          title="Price drops"
+          accent="worth moving for"
+          description="Limited-time reductions across every property class. Tap any deal for the full story."
+        />
+
+        <div className="reveal no-scrollbar -mx-5 mb-10 overflow-x-auto px-5">
+          <ul className="relative flex w-max gap-2 rounded-full bg-paper p-1.5" role="tablist">
+            <span
+              className="tab-pill absolute inset-y-1.5 left-0 rounded-full bg-ink"
+              style={{ transform: `translateX(${pill.x}px)`, width: pill.w }}
+              aria-hidden="true"
+            />
+            {categories.map((c, i) => (
+              <li key={c} className="relative" ref={(el) => (refs.current[i] = el)}>
+                <button
+                  role="tab"
+                  aria-selected={tap === i}
+                  onClick={() => settap(i)}
+                  className={`${tap === i ? Styles.link : ""} whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-500 ${
+                    tap === i ? "text-paper" : "text-ink/60 hover:text-ink"
+                  }`}
+                >
+                  {c} Property
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div key={tap} className="grid auto-rows-[280px] gap-6 md:grid-cols-[1.35fr_1fr] md:auto-rows-[300px]">
+          {shown.map((item, i) => (
+            <DealCard key={item.id} item={item} big={i === 0} i={i} onOpen={onOpen} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

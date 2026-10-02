@@ -1,8 +1,32 @@
-const Header = ({ title, description }) => {
+/* eslint-disable react/prop-types */
+import SplitWords from "../SplitWords";
+
+// Editorial section header: numbered eyebrow + big serif title on the left, description on the right.
+const Header = ({ num, eyebrow, title, accent, description, light = false, stack = false, children }) => {
   return (
-    <div className="px-[20px] lg:px-[70px] mb-[56px]">
-      <h1 className="text-[#222222] font-[700] text-[39px]">{title}</h1>
-      <p className="text-[#22222280] text-[15px] ">{description}</p>
+    <div className={`mb-14 grid gap-6 ${stack ? "" : "md:grid-cols-[1.3fr_1fr] md:items-end"}`}>
+      <div>
+        <p className={`eyebrow reveal ${light ? "!text-brand-300" : ""}`}>
+          {num && <span className="num">{num}</span>} {eyebrow}
+        </p>
+        <h2 className={`h-section mt-4 ${light ? "!text-paper" : ""}`}>
+          <SplitWords text={title} />
+          {accent && (
+            <>
+              {" "}
+              <em className={light ? "!text-brand-300" : ""}>
+                <SplitWords text={accent} delay={200} />
+              </em>
+            </>
+          )}
+        </h2>
+      </div>
+      <div className="reveal md:pb-3" style={{ "--d": "200ms" }}>
+        {description && (
+          <p className={`max-w-md text-base leading-relaxed ${light ? "text-paper/70" : "text-ink/60"}`}>{description}</p>
+        )}
+        {children}
+      </div>
     </div>
   );
 };

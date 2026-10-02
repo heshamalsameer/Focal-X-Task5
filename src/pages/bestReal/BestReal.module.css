@@ -1,11 +1,7 @@
+/* active tab marker (text colour handled by Tailwind) */
 .link {
-  color: #025595;
+  position: relative;
 }
-.link::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: #025595;
-  bottom: -15px;
+.deal {
+  box-shadow: 0 30px 60px -40px rgba(14, 23, 38, 0.6);
 }
